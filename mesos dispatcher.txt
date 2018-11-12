@@ -1,0 +1,25 @@
+export MESOS_MASTER="mesos://zk://${ZK}/${ZK_MESOS_ROOT}"
+
+echo "************************************************************"
+echo "LIBPROCESS_IP: ${LIBPROCESS_IP}"
+echo "MASTER: ${MESOS_MASTER}"
+echo "WEBUI PORT: ${PORT0}"
+echo "RPC PORT: ${PORT1}"
+echo "************************************************************"
+
+$SPARK_HOME/bin/spark-class \
+    org.apache.spark.deploy.mesos.MesosClusterDispatcher \
+    --master ${MESOS_MASTER} \
+    --host ${LIBPROCESS_IP} \
+    --port ${PORT1} \
+    --webui-port ${PORT0} \
+    --name "${SPARK_DISPATCHER_NAME}" \
+    --zk ${ZK} \
+    --properties-file ${SPARK_HOME}/conf/spark-defaults.conf
+	
+	
+	
+	
+--class org.apache.spark.examples.SparkPi --master mesos://10.10.35.11:7078 --deploy-mode cluster --supervise --executor-memory 2G --total-executor-cores 4 hdfs:///tmp/whsh/mesos/mesos-spark/spark-examples-1.6.2-hadoop2.0.0-mr1-cdh4.2.0.jar 1000
+	
+	
